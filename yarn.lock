@@ -1961,6 +1961,11 @@
     "@theme-ui/preset-tailwind" "^0.2.42"
     "@theme-ui/preset-tosh" "^0.2.40"
 
+"@types/cannon@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@types/cannon/-/cannon-0.1.4.tgz#71ef5dee4b9095adc3788afb8555dd6b7e29bad9"
+  integrity sha512-Du7ylapwErz90Q9g9RXzieg5EV6rcuCDMHkVX9mXbFEjhFcWKYA5QcBWz95mqYQxrcU5ukZMBhmeNqww953cfA==
+
 "@types/configstore@^2.1.1":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@types/configstore/-/configstore-2.1.1.tgz#cd1e8553633ad3185c3f2f239ecff5d2643e92b6"
@@ -3476,6 +3481,11 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30001010:
   version "1.0.30001010"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001010.tgz#397a14034d384260453cc81994f494626d34b938"
   integrity sha512-RA5GH9YjFNea4ZQszdWgh2SC+dpLiRAg4VDQS2b5JRI45OxmbGrYocYHTa9x0bKMQUE7uvHkNPNffUr+pCxSGw==
+
+cannon@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/cannon/-/cannon-0.6.2.tgz#1e7bc72dd5841982f3c104c2bc578bfa4fb1c572"
+  integrity sha1-HnvHLdWEGYLzwQTCvFeL+k+xxXI=
 
 capture-stack-trace@^1.0.0:
   version "1.0.1"
@@ -10649,20 +10659,6 @@ react-reconciler@^0.21.0:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
     scheduler "^0.15.0"
-
-"react-three-fiber@.\\react-three-fiber-4.0.0-rc.1338.tgz":
-  version "4.0.0-rc.1338"
-  resolved ".\\react-three-fiber-4.0.0-rc.1338.tgz#4bcf0e20a8934d36b837935d879aac3ed045f302"
-  dependencies:
-    "@babel/runtime" "^7.7.1"
-    "@juggle/resize-observer" "^2.4.0"
-    react-promise-suspense "^0.3.1"
-    react-reconciler "0.23.0"
-    react-use-measure "^2.0.0"
-    resize-observer-polyfill "^1.5.1"
-    scheduler "0.17.0"
-    tiny-emitter "^2.1.0"
-    utility-types "^3.8.0"
 
 "react-three-fiber@.\\react-three-fiber-v4.0.0-rc.1338.tgz":
   version "4.0.0-rc.1338"

@@ -32,7 +32,7 @@ export function Controls() {
       ref={controlsRef}
       args={[camera, gl.domElement]}
       enableRotate
-      enablePan
+      enablePan={false}
       maxDistance={100}
       minDistance={7}
       minPolarAngle={Math.PI / 6}

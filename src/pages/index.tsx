@@ -4,7 +4,7 @@ import { Global } from "@emotion/core";
 import React, { Fragment, useEffect, useLayoutEffect } from "react";
 import { Color, Vector3 } from "three";
 
-import { Canvas, useThree } from "react-three-fiber";
+import { Canvas, useThree, useFrame } from "react-three-fiber";
 import {
   Mesh,
   BoxBufferGeometry,
@@ -17,6 +17,7 @@ import { Controls } from "../components/Controls";
 import { PoolTable } from "../components/PoolTable";
 import { PoolBall } from "../components/PoolBall";
 import { ballTextures, whiteBallTexture } from "../assets/ballTextures";
+import { Cue } from "../components/Cue";
 
 const white = new Color(0xffffff);
 
@@ -38,12 +39,14 @@ const initialBallPositions = [
   [1.01, 15, 0],
 ];
 
-function Scene() {
+function Main() {
   const { camera } = useThree();
 
   useEffect(() => {
     camera.position.set(0, -16 - 12, 16);
   }, []);
+
+  useFrame(() => {});
 
   return (
     <Fragment>
@@ -67,6 +70,7 @@ function Scene() {
         <PoolTable />
       </React.Suspense>
       <PoolBall position={[0, -16, 0]} textureUrl={whiteBallTexture} />
+      <Cue position={[0, -16, 0]} />
       <Object3D>
         {initialBallPositions.map((pos, i) => {
           return (
@@ -99,7 +103,7 @@ export default () => (
         far: 1000,
       }}
     >
-      <Scene />
+      <Main />
       <Controls />
     </Canvas>
   </Fragment>
