@@ -1,23 +1,23 @@
-import React, { useRef } from "react"
-import { extend, useThree, useFrame, ReactThreeFiber } from "react-three-fiber"
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
+import React, { useRef } from "react";
+import { extend, useThree, useFrame, ReactThreeFiber } from "react-three-fiber";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 // TODO: Consider returning fake component from `extend`
-extend({ OrbitControls })
+extend({ OrbitControls });
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      orbitControls: ReactThreeFiber.Node<OrbitControls, typeof OrbitControls>
+      orbitControls: ReactThreeFiber.Node<OrbitControls, typeof OrbitControls>;
     }
   }
 }
 
 export function Controls() {
-  const controlsRef = useRef<OrbitControls>()
-  const { camera, gl } = useThree()
+  const controlsRef = useRef<OrbitControls>();
+  const { camera, gl } = useThree();
 
-  useFrame(() => controlsRef.current && controlsRef.current.update())
+  useFrame(() => controlsRef.current && controlsRef.current.update());
 
   return (
     <orbitControls
@@ -30,5 +30,5 @@ export function Controls() {
       minPolarAngle={Math.PI / 6}
       maxPolarAngle={Math.PI / 2}
     />
-  )
+  );
 }

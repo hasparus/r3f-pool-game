@@ -23,7 +23,7 @@
     "gatsby-plugin-ts": "^2.0.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-three-fiber": ".\\react-three-fiber-4.0.0-rc.2.tgz",
+    "react-three-fiber": ".\\react-three-fiber-v4.0.0-rc.1338.tgz",
     "theme-ui": "^0.2.49",
     "typescript": "^3.7.2"
   },
