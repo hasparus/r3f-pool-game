@@ -122,7 +122,10 @@ export default () => (
     <Canvas
       camera={{
         up: [0, 0, 1],
-        aspect: window.innerWidth / window.innerHeight,
+        aspect:
+          typeof window !== "undefined"
+            ? window.innerWidth / window.innerHeight
+            : 1,
         near: 0.1,
         far: 1000,
       }}
