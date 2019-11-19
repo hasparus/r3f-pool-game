@@ -1,15 +1,14 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { extend, useThree, useFrame, ReactThreeFiber } from "react-three-fiber";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { Vector3 } from "three";
+import { MapControls } from "three/examples/jsm/controls/OrbitControls";
 
 // TODO: Consider returning fake component from `extend`
-extend({ OrbitControls });
+extend({ MapControls });
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      orbitControls: ReactThreeFiber.Node<OrbitControls, typeof OrbitControls>;
+      mapControls: ReactThreeFiber.Node<MapControls, typeof MapControls>;
     }
   }
 }
@@ -22,13 +21,35 @@ const keys = {
 };
 
 export function Controls() {
-  const controlsRef = useRef<OrbitControls>();
+  const controlsRef = useRef<MapControls>();
   const { camera, gl } = useThree();
+
+  // set cursor to "grabbing" while user rotates
+  useEffect(() => {
+    let previousCursor = "default";
+    const onMouseDown = (event: MouseEvent) => {
+      if (event.button === 2) {
+        previousCursor = document.body.style.cursor;
+        document.body.style.cursor = "grabbing";
+      }
+    };
+    const onMouseUp = (event: MouseEvent) => {
+      if (event.button === 2) {
+        document.body.style.cursor = previousCursor;
+      }
+    };
+    document.addEventListener("mousedown", onMouseDown);
+    document.addEventListener("mouseup", onMouseUp);
+    return () => {
+      document.removeEventListener("mousedown", onMouseDown);
+      document.removeEventListener("mouseup", onMouseUp);
+    };
+  }, []);
 
   useFrame(() => controlsRef.current && controlsRef.current.update());
 
   return (
-    <orbitControls
+    <mapControls
       ref={controlsRef}
       args={[camera, gl.domElement]}
       enableRotate
