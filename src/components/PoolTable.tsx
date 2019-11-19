@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { useLoader } from "react-three-fiber";
 import * as t from "react-three-fiber/components";
 
@@ -12,6 +12,7 @@ import {
   CylinderGeometry,
   MeshBasicMaterial,
   Texture,
+  Object3D,
 } from "three";
 
 import ClothTextureURL from "../assets/cloth.jpg";
@@ -51,7 +52,7 @@ const pocketGeometry = new CylinderGeometry(1, 1, 1.4, 20);
 // material for pockets
 const pocketMaterial = new MeshBasicMaterial({ color: 0x000000 });
 
-export function PoolTable() {
+export const PoolTable = forwardRef<Object3D>(({}, ref) => {
   // loading texture for the play area
   const clothTexture = useLoader(TextureLoader, ClothTextureURL);
   clothTexture.wrapS = RepeatWrapping;
@@ -69,7 +70,7 @@ export function PoolTable() {
   clothMaterial.map = clothTexture;
 
   return (
-    <t.Object3D position={[0, 0, -1]}>
+    <t.Object3D position={[0, 0, -1]} ref={ref}>
       {/* mesh for the playing area */}
       <t.Mesh receiveShadow>
         <t.BoxGeometry attach="geometry" args={[24, 48, 1]} />
@@ -176,4 +177,4 @@ export function PoolTable() {
       })}
     </t.Object3D>
   );
-}
+});

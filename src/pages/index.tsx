@@ -1,8 +1,15 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
 import { Global } from "@emotion/core";
-import React, { Fragment, useEffect, useLayoutEffect } from "react";
+import React, {
+  Fragment,
+  useEffect,
+  useLayoutEffect,
+  useState,
+  useRef,
+} from "react";
 import { Color, Vector3 } from "three";
+import * as THREE from "three";
 
 import { Canvas, useThree, useFrame } from "react-three-fiber";
 import {
@@ -40,13 +47,22 @@ const initialBallPositions = [
 ];
 
 function Main() {
-  const { camera } = useThree();
+  const { camera, scene, raycaster } = useThree();
 
   useEffect(() => {
     camera.position.set(0, -16 - 12, 16);
   }, []);
 
-  useFrame(() => {});
+  const gameRoot = useRef<THREE.Object3D>();
+  const [whiteBallPos, setWhiteBallPos] = useState([0, -16, 0]);
+  const [cuePosition, setCuePosition] = useState();
+
+  useFrame(({ mouse, raycaster, camera: cam }) => {
+    if (gameRoot.current) {
+      raycaster.setFromCamera(mouse, cam);
+      console.log(raycaster.intersectObject(gameRoot.current));
+    }
+  });
 
   return (
     <Fragment>
@@ -66,17 +82,25 @@ function Main() {
           castShadow
         />
       ))}
-      <React.Suspense fallback={<mesh />}>
-        <PoolTable />
-      </React.Suspense>
-      <PoolBall position={[0, -16, 0]} textureUrl={whiteBallTexture} />
-      <Cue position={[0, -16, 0]} />
+      {/* debug */}
+      <mesh position={cuePosition}>
+        <sphereGeometry attach="geometry" />
+        <meshNormalMaterial attach="material" />
+      </mesh>
+
       <Object3D>
-        {initialBallPositions.map((pos, i) => {
-          return (
-            <PoolBall key={i} position={pos} textureUrl={ballTextures[i]} />
-          );
-        })}
+        <React.Suspense fallback={<mesh />}>
+          <PoolTable />
+        </React.Suspense>
+        <PoolBall position={whiteBallPos} textureUrl={whiteBallTexture} />
+        <Cue position={[0, -16, 0]} />
+        <Object3D>
+          {initialBallPositions.map((pos, i) => {
+            return (
+              <PoolBall key={i} position={pos} textureUrl={ballTextures[i]} />
+            );
+          })}
+        </Object3D>
       </Object3D>
     </Fragment>
   );
