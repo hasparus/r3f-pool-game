@@ -1,4 +1,4 @@
-import zero from "./0.png";
+export { default as whiteBallTexture } from "./0.png";
 import one from "./1.png";
 import two from "./2.png";
 import three from "./3.png";
@@ -16,7 +16,6 @@ import fourteen from "./14.png";
 import fifteen from "./15.png";
 
 export const ballTextures = [
-  zero,
   one,
   two,
   three,

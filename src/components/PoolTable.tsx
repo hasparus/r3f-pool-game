@@ -33,7 +33,7 @@ const cushionGeometry = new ExtrudeGeometry(shape, extrudeSettings);
 
 // material for the play area
 const clothMaterial = new MeshStandardMaterial({
-  color: 0x42a8ff,
+  color: "#42a8ff",
   roughness: 0.4,
   metalness: 0,
   bumpScale: 1,

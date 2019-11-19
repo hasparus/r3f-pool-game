@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui";
 import { Global } from "@emotion/core";
 import React, { Fragment, useEffect, useLayoutEffect } from "react";
-import * as Three from "three";
+import { Color, Vector3 } from "three";
 
 import { Canvas, useThree } from "react-three-fiber";
 import {
@@ -16,12 +16,11 @@ import {
 import { Controls } from "../components/Controls";
 import { PoolTable } from "../components/PoolTable";
 import { PoolBall } from "../components/PoolBall";
-import { ballTextures } from "../assets/ballTextures";
+import { ballTextures, whiteBallTexture } from "../assets/ballTextures";
 
-const white = new Three.Color(0xffffff);
+const white = new Color(0xffffff);
 
 const initialBallPositions = [
-  [0, -16, 0],
   [-1.01, 15, 0],
   [1.01, 17, 0],
   [-0.51, 16, 0],
@@ -42,14 +41,8 @@ const initialBallPositions = [
 function Scene() {
   const { camera } = useThree();
 
-  useLayoutEffect(() => {
-    // does this work at all?
-    // (camera as any).fov = 45;
-    // (camera as any).aspect = window.innerWidth / window.innerHeight;
-    camera.near = 0.1;
-    camera.far = 2000;
-    camera.up.set(0, 0, 1);
-    camera.position.set(-5, 7, 5);
+  useEffect(() => {
+    camera.position.set(0, -16 - 12, 16);
   }, []);
 
   return (
@@ -73,6 +66,7 @@ function Scene() {
       <React.Suspense fallback={<mesh />}>
         <PoolTable />
       </React.Suspense>
+      <PoolBall position={[0, -16, 0]} textureUrl={whiteBallTexture} />
       <Object3D>
         {initialBallPositions.map((pos, i) => {
           return (
@@ -97,7 +91,14 @@ export default () => (
         "#___gatsby, #gatsby-focus-wrapper": { height: "100%" },
       }}
     />
-    <Canvas>
+    <Canvas
+      camera={{
+        up: [0, 0, 1],
+        aspect: window.innerWidth / window.innerHeight,
+        near: 0.1,
+        far: 1000,
+      }}
+    >
       <Scene />
       <Controls />
     </Canvas>
